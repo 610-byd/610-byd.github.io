@@ -1,0 +1,38 @@
+@import "base.css";
+
+
+/* 去除链接的下划线 */
+a {
+  text-decoration: none;
+}
+
+/* 正常未访问链接 */
+a:link {
+  color: black;
+}
+
+/* 已访问过的链接 */
+a:visited {
+  color: black;
+}
+
+/* 当鼠标悬停在链接上时 */
+a:hover {
+  color: black;
+}
+
+/* 当链接被点击或正在激活时 */
+a:active {
+  color: black;
+}
+
+
+a span {
+  background: linear-gradient(to right, #bd34fe 30%, #41d1ff) no-repeat left bottom;
+  background-size: 0px 5px;
+  transition: 0.5s;
+}
+
+a span:hover {
+  background-size: 100% 5px;
+}
