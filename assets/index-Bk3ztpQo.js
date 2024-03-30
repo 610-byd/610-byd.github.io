@@ -1,1 +1,0 @@
-import{_ as o,g as t,h as n,i as s,o as a,b as r}from"./index-LxcPh9HD.js";const c={name:"index"},_=r("span",null,"前往登分器==>",-1);function i(p,d,u,f,l,m){const e=t("RouterLink");return a(),n(e,{to:"/grades"},{default:s(()=>[_]),_:1})}const h=o(c,[["render",i]]);export{h as default};

@@ -1,0 +1,1 @@
+import{_ as e,c as a,o}from"./index-CkLxitnL.js";const t={name:"aboutPage"};function c(s,n,r,_,p,d){return o(),a("h1",null,"This is a aboutPage")}const u=e(t,[["render",c],["__scopeId","data-v-59cbc7a0"]]);export{u as default};
