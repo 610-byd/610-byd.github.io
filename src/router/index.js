@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import {gsap} from 'gsap'
+
 
 const pages = import.meta.glob('../views/**/page.js', {
   eager: true,
@@ -19,8 +21,16 @@ const routes = Object.entries(pages).map(([path, meta]) => {
 },
 )
 
+
+
+
 const router = createRouter({
   history: createWebHistory(),
   routes
 })
+
+
+
+
+
 export default router

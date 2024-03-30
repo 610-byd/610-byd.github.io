@@ -28,11 +28,11 @@ a:active {
 
 
 a span {
-  background: linear-gradient(to right, #bd34fe 30%, #41d1ff) no-repeat left bottom;
-  background-size: 0px 5px;
+  background: linear-gradient(to right,#fff 30%, #fff) no-repeat left bottom;
+  background-size: 0px 2px;
   transition: 0.5s;
 }
 
 a span:hover {
-  background-size: 100% 5px;
+  background-size: 100% 2px;
 }

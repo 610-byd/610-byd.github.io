@@ -1,11 +1,12 @@
 <template>
-    <RouterLink to="/grades" ><span>前往登分器==></span></RouterLink>
+
+    <h1 class="title"></h1>
+
 </template>
 <script>
 export default {
     name: 'index',
 }
 </script>
-<style>
 
-</style>
+<style scoped src="./index.css"></style>

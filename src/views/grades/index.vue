@@ -3,53 +3,70 @@
 </script>
 
 <template>
-  <header>
-    <h1 class="title">登分器</h1>
-  </header>
+  <h1 class="title"></h1>
+  <h1 class="tlt">登分器</h1>
+
   <main>
-    <button @click="handleInput">下一个</button>
-    <input type="number" v-model="arrnum" @input="fetcharrnum" />
-    <p>当前学生：{{ arrname }}</p>
-    <input type="number" v-model="grades" @keyup.enter="handleInput" />
-    <div class="container">
-      <div class="row">
-        <div class="column">
-          <p v-for="num in nums">{{ num }}</p>
-        </div>
-        <div class="column">
-          <p v-for="name in names">{{ name }}</p>
-        </div>
-        <div class="column">
-          <p v-for="grade in rawgrades" contenteditable="true">{{ grade }}</p>
+    <button class="animated-button" @click="handleInput">
+      <svg xmlns="http://www.w3.org/2000/svg" class="arr-2" viewBox="0 0 24 24">
+        <path
+          d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+        </path>
+      </svg>
+      <span class="text">下一个</span>
+      <span class="circle"></span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="arr-1" viewBox="0 0 24 24">
+        <path
+          d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+        </path>
+      </svg>
+    </button>
+    <div class="input-container">
+      <input type="number" id="input" required="" v-model="arrnum" @input="fetcharrnum">
+      <label for="input" class="label">输入学号</label>
+      <div class="underline"></div>
+    </div>
+    <h2>当前学生：{{ arrname }}</h2>
+    <div class="input-container">
+      <input type="number" id="input" required="" v-model="grades" @keyup.enter="handleInput">
+      <label for="input" class="label">输入其分数</label>
+      <div class="underline"></div>
+    </div>
+    <!-- <input type="number" v-model="arrnum" @input="fetcharrnum" /> -->
+    <div class="input-box">
+      <!-- <button @click="handleInput">下一个</button> -->
+
+
+      <!-- <input type="number" v-model="grades" @keyup.enter="handleInput" /> -->
+      <div class="container">
+        <div class="row">
+          <div class="column">
+            <p v-for="num in nums">{{ num }}</p>
+          </div>
+          <div class="column">
+            <p v-for="name in names">{{ name }}</p>
+          </div>
+          <div class="column">
+            <p v-for="grade in rawgrades" contenteditable="true">{{ grade }}</p>
+          </div>
+          <div class="column">
+            <p v-for="(teamgrade, index) in avgEverySeven" :key="index">{{ teamgrade.toFixed(2) }}</p>
+
+          </div>
+
+
         </div>
       </div>
     </div>
 
   </main>
+
+
 </template>
 
-<style scoped>
-.container {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.row {
-  display: flex;
-  align-items: center;
-}
-
-.column {
-  flex-grow: 1;
-  margin-right: 3rem;
-  /* 添加间隔 */
-}
-
-</style>
+<style scoped src="./index.css"></style>
 
 <script>
-
-import { ref, reactive } from 'vue';
 import data from '../../components/data.js';
 
 
@@ -93,10 +110,41 @@ export default {
         grades.value = '';
         arrnum.value = '';
         arrname.value = '';
+        avgEverySeven();
       } else {
         alert('成绩输入有误');
       }
     }
+
+    /**
+     * 计算每组（默认七个）原始成绩的平均分，若最后不足七个则按剩余数量计算平均数。
+     * 该函数是一个计算属性，不接受参数。
+     *
+     * @returns {Array} 返回一个包含每组成绩平均分的数组。
+     */
+    const avgEverySeven = computed(() => {
+      const results = []; // 用于存储每组成绩的平均分结果
+
+      // 遍历原始成绩数组，处理最后一组可能不足七个的情况
+      for (let i = 0; i <= rawgrades.value.length - 7; i += 7) {
+        const end = Math.min(i + 6, rawgrades.value.length); // 确定当前子数组结束位置
+        const subArr = rawgrades.value.slice(i, end); // 截取当前子数组
+        const sum = subArr.reduce((acc, curr) => acc + curr, 0); // 计算子数组总分
+        const avg = sum / subArr.length; // 计算平均分
+        results.push(avg); // 将平均分添加到结果数组中
+        console.log(subArr)
+      }
+
+      // 处理剩余不足七个的成绩（如果存在）
+      if (rawgrades.value.length % 7 !== 0) {
+        const remainingSubArr = rawgrades.value.slice(-Math.min(7, rawgrades.value.length % 7));
+        const remainingSum = remainingSubArr.reduce((acc, curr) => acc + curr, 0);
+        const remainingAvg = remainingSum / remainingSubArr.length;
+        results.push(remainingAvg);
+      }
+
+      return results; // 返回结果数组
+    });
 
     // 返回需要暴露给模板的数据和方法
     return {
@@ -107,6 +155,7 @@ export default {
       arrname,
       grades,
       index,
+      avgEverySeven,
       fetcharrnum,
       handleInput,
     };
