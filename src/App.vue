@@ -3,7 +3,7 @@
   <header class="header">
     <input type="checkbox" name="check" id="check">
     <!-- logo -->
-    <h1 class="logo">webyd<div class="loader"></div></h1>
+    <h1 class="logo">webyd</h1>
     
     <!-- nav -->
     <nav class="nav">
