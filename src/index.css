@@ -98,7 +98,6 @@
     display: none;
 }
 
-/* HTML: <div class="loader"></div> */
 
 
 @media (max-width: 768px) {
@@ -151,6 +150,8 @@
     .signup {
         margin-right: 16px;
     }
+
+    
 
     .menu {
         font-size: 45px;

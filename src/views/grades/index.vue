@@ -1,5 +1,4 @@
 <script setup>
-
 </script>
 
 <template>
@@ -7,37 +6,38 @@
   <h1 class="tlt">登分器</h1>
 
   <main>
-    <button class="animated-button" @click="handleInput">
-      <svg xmlns="http://www.w3.org/2000/svg" class="arr-2" viewBox="0 0 24 24">
-        <path
-          d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
-        </path>
-      </svg>
-      <span class="text">下一个</span>
-      <span class="circle"></span>
-      <svg xmlns="http://www.w3.org/2000/svg" class="arr-1" viewBox="0 0 24 24">
-        <path
-          d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
-        </path>
-      </svg>
-    </button>
-    <div class="input-container">
+    <button @click="handleInput" v-if="isMobile">下一个</button>
+    <div class="btn">
+      <button class="animated-button" @click="handleInput" v-if="!isMobile">
+        <svg xmlns="http://www.w3.org/2000/svg" class="arr-2" viewBox="0 0 24 24">
+          <path
+            d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+          </path>
+        </svg>
+        <span class="text">下一个</span>
+        <span class="circle"></span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="arr-1" viewBox="0 0 24 24">
+          <path
+            d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+          </path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="input-container" v-if="!isMobile">
       <input type="number" id="input" required="" v-model="arrnum" @input="fetcharrnum">
       <label for="input" class="label">输入学号</label>
       <div class="underline"></div>
     </div>
+    <input type="number" required="" v-model="arrnum" @input="fetcharrnum" v-if="isMobile" >
     <h2>当前学生：{{ arrname }}</h2>
-    <div class="input-container">
+    <div class="input-container" v-if="!isMobile">
       <input type="number" id="input" required="" v-model="grades" @keyup.enter="handleInput">
       <label for="input" class="label">输入其分数</label>
       <div class="underline"></div>
     </div>
-    <!-- <input type="number" v-model="arrnum" @input="fetcharrnum" /> -->
+    <input ype="number" required="" v-model="grades" @keyup.enter="handleInput" v-if="isMobile">
     <div class="input-box">
-      <!-- <button @click="handleInput">下一个</button> -->
-
-
-      <!-- <input type="number" v-model="grades" @keyup.enter="handleInput" /> -->
       <div class="container">
         <div class="row">
           <div class="column">
@@ -71,23 +71,36 @@ import data from '../../components/data.js';
 
 
 export default {
+
   setup() {
     // 定义数据
     const dataArr = reactive(data);
-    const index = ref(0)//原数组索引
+    const ArrIndex = ref(0)//原数组索引
     const arrnum = ref(''); //学号（输入值）
     const arrname = ref(''); //姓名
     const grades = ref(''); //分数（输入值）
     const names = ref(dataArr.map(item => item.name));
     const nums = ref(dataArr.map(item => item.num));
     const rawgrades = ref(dataArr.map(item => item.grade));
+    const isMobile = ref(false);
+
+    onMounted(() => {
+      const viewportWidth = window.innerWidth;
+      if (viewportWidth < 768) {
+        isMobile.value = true;
+      }
+    })
+
+
+
+
 
     /**
      * 通过将学号减一的方式获取正确数组的索引
      */
     function fetcharrnum() {
       if (arrnum.value >= 0 && arrnum.value <= dataArr.length) {
-        index.value = arrnum.value - 1;
+        ArrIndex.value = arrnum.value - 1;
         fatchname();
 
       } else {
@@ -99,14 +112,14 @@ export default {
      */
 
     function fatchname() {
-      arrname.value = dataArr[index.value].name;
+      arrname.value = dataArr[ArrIndex.value].name;
     }
     /**
      * 将输入的分数添加到原分数数组中
      */
     function handleInput() {
       if (grades.value >= 0 && grades.value) {
-        rawgrades.value[index.value] = grades.value;
+        rawgrades.value[ArrIndex.value] = grades.value;
         grades.value = '';
         arrnum.value = '';
         arrname.value = '';
@@ -148,13 +161,14 @@ export default {
 
     // 返回需要暴露给模板的数据和方法
     return {
+      isMobile,
       rawgrades,
       nums,
       names,
       arrnum,
       arrname,
       grades,
-      index,
+      ArrIndex,
       avgEverySeven,
       fetcharrnum,
       handleInput,
