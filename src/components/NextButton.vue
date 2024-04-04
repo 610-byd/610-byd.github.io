@@ -1,29 +1,22 @@
-
-.container{
-    margin-top: 0px;
-}
-
-.container {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.row {
-    display: flex;
-    align-items: center;
-}
-
-.column {
-    flex-grow: 1;
-    margin-right: 3rem;
-    /* 添加间隔 */
-}
-
-.input-box {
-    color: #121212;
-}
+<template>
+    <button class="animated-button">
+        <svg xmlns="http://www.w3.org/2000/svg" class="arr-2" viewBox="0 0 24 24">
+            <path
+                d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+            </path>
+        </svg>
+        <span class="text"><solt></solt></span>
+        <span class="circle"></span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="arr-1" viewBox="0 0 24 24">
+            <path
+                d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+            </path>
+        </svg>
+    </button>
+</template>
 
 
+<style scoped>
 .animated-button {
     position: relative;
     display: flex;
@@ -110,73 +103,13 @@
     height: 220px;
     opacity: 1;
 }
+</style>
+
+<script>
+
+export default {
+    name: 'Btn',
+}
 
 
-.input-container {
-    position: relative;
-    margin: 30px 16px;
-    width: 200px;
-}
-
-.input-container input[type="number"] {
-    font-size: 20px;
-    width: 100%;
-    border: none;
-    border-bottom: 2px solid #ccc;
-    padding: 5px 0;
-    background-color: transparent;
-    outline: none;
-}
-
-.input-container .label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: #ccc;
-    transition: all 0.3s ease;
-    pointer-events: none;
-}
-
-.input-container input[type="number"]:focus~.label,
-.input-container input[type="number"]:valid~.label {
-    top: -20px;
-    font-size: 16px;
-    color: #333;
-}
-
-.input-container .underline {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 2px;
-    width: 100%;
-    background-color: #333;
-    transform: scaleX(0);
-    transition: all 0.3s ease;
-}
-
-.input-container input[type="number"]:focus~.underline,
-.input-container input[type="number"]:valid~.underline {
-    transform: scaleX(1);
-}
-
-.MobileBtn{
-    display: none;
-}
-.MobileInput {
-    display: none;
-}
-@media(max-width: 768px) {
-    .MobileInput{
-        display: block;
-    }
-    .input-container{
-        display: none;
-    }
-    .animated-button{
-        display: none;
-    }
-    .MobileBtn{
-        display: block;
-    }
-}
+</script>

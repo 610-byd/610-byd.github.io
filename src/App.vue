@@ -1,6 +1,6 @@
 <template>
 
-  <header class="header">
+  <header class="header" style="background: black;">
     <input type="checkbox" name="check" id="check">
     <!-- logo -->
     <h1 class="logo">webyd</h1>
@@ -25,7 +25,7 @@
     </div>
     
   </header>
-  <h1 class="title"></h1>
+
   <router-view />
 
 </template>

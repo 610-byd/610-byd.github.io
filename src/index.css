@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap');
+
 @import url('https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css');
 
 
@@ -7,6 +7,7 @@
     padding: 0;
     font-family: Poppins;
 }
+
 
 .title {
     color: white;
@@ -24,6 +25,7 @@
 }
 
 .header {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -151,7 +153,7 @@
         margin-right: 16px;
     }
 
-    
+
 
     .menu {
         font-size: 45px;
