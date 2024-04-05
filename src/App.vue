@@ -12,7 +12,7 @@
       <RouterLink to="/"><span>home</span></RouterLink>
       <RouterLink to="/about"><span>about</span></RouterLink>
       <RouterLink to="/contact"><span>contact</span></RouterLink>
-      <RouterLink to="/grades"><span>Grades</span></RouterLink>
+      <RouterLink to="/items"><span>Items</span></RouterLink>
     </nav>
     <!-- 用户表单按钮 -->
     <div class="user-form-group">

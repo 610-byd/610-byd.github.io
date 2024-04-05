@@ -6,7 +6,7 @@
   <h1 class="tlt">登分器</h1>
 
   <main>
-    <button @click="handleInput" class="MobileBtn">下一个</button>
+    <button @click="handleInput" class="MobileBtn">Next</button>
     <div class="btn">
       <button class="animated-button" @click="handleInput">
         <svg xmlns="http://www.w3.org/2000/svg" class="arr-2" viewBox="0 0 24 24">
@@ -24,21 +24,38 @@
       </button>
     </div>
 
+
+    <label>
+      <input type="checkbox" v-model="isFullPerson" @click="CheckToCalculateGroupAverages" />
+      是否去除未考式人员
+    </label>
+
+
     <div class="input-container">
       <input type="number" id="input" required="" v-model="ArrNum" @input="fetchArrNum">
       <label for="input" class="label">输入学号</label>
       <div class="underline"></div>
     </div>
     <input type="number" required="" v-model="ArrNum" @input="fetchArrNum" class="MobileInput">
+
+
     <h2>当前学生：{{ ArrName }}</h2>
+
+
     <div class="input-container">
       <input type="number" id="input" required="" v-model="grades" @keyup.enter="handleInput">
       <label for="input" class="label">输入其分数</label>
       <div class="underline"></div>
     </div>
     <input type="number" required="" v-model="grades" @keyup.enter="handleInput" class="MobileInput">
+
+
     <button @click="handleInputToExpert">导出</button>
+
+
     <button @click="test">测试</button>
+
+
     <div class="input-box">
       <div class="container">
         <div class="row">
@@ -53,17 +70,11 @@
           </div>
           <div class="column">
             <p v-for="(teamgrade, index) in avgEverySeven" :key="index">{{ teamgrade.toFixed(2) }}</p>
-
           </div>
-
-
         </div>
       </div>
     </div>
-
   </main>
-
-
 </template>
 
 
@@ -72,7 +83,7 @@
 <style scoped src="./index.css"></style>
 
 <script>
-import data from '../../components/data.js';
+import data from '../../../components/data.js';
 import { utils, writeFileXLSX } from 'xlsx';
 
 
@@ -90,6 +101,8 @@ export default {
     const nums = ref(DataArr.map(item => item.num));
     const RawGrades = ref(DataArr.map(item => item.grade));
     const avgEverySeven = ref([]);
+    const isFullPerson = ref(false);
+
 
     onMounted(() => {
     })
@@ -98,7 +111,8 @@ export default {
      * 测试
      */
     function test() {
-      console.log(DataArr);
+      console.log(RawGrades.value);
+      console.log(isFullPerson.value);
     }
 
 
@@ -159,21 +173,36 @@ export default {
       let numGroups = 0;
       let groupAverages = [];
 
-      for (let i = 0; i < scores.length; i += groupSizes) {
-        const groupEnd = Math.min(i + groupSizes, scores.length);
-        const groupScores = scores.slice(i, groupEnd);
-        const rightScores = groupScores.filter(score => score !== null && score !== undefined && score !== 0);
-        const groupAverage =
-          rightScores.reduce((sum, score) => sum + score, 0) / rightScores.length;
-        totalScore += rightScores;
-        numGroups++;
-        groupAverages.push(groupAverage);
-        console.log(groupEnd)
-        console.log(groupAverage)
-        console.log(groupScores)
+      if (!isFullPerson.value == false) {
+        for (let i = 0; i < scores.length; i += groupSizes) {
+          const groupEnd = Math.min(i + groupSizes, scores.length);
+          const groupScores = scores.slice(i, groupEnd);
+          const rightScores = groupScores.filter(score => score !== null && score !== undefined && score !== 0);
+          const groupAverage =
+            rightScores.reduce((sum, score) => sum + score, 0) / rightScores.length;
+          totalScore += rightScores;
+          numGroups++;
+          groupAverages.push(groupAverage);
+        }
+      } else {
+        for (let i = 0; i < scores.length; i += groupSizes) {
+          const groupEnd = Math.min(i + groupSizes, scores.length);
+          const groupScores = scores.slice(i, groupEnd);
+          const groupAverage = groupScores.reduce((sum, score) => sum + score, 0) / groupScores.length;
+          totalScore += groupScores;
+          numGroups++;
+          groupAverages.push(groupAverage);
+        }
       }
 
       avgEverySeven.value = groupAverages;
+    }
+
+
+    function CheckToCalculateGroupAverages() {
+      setTimeout(() => {
+        calculateGroupAverages(RawGrades.value)
+      }, 300)
     }
 
 
@@ -221,7 +250,7 @@ export default {
       exportFile(newArray);
     }
 
-    
+
     function exportFile(src) {
       /* generate worksheet from state */
       const ws = utils.json_to_sheet(src);
@@ -261,6 +290,7 @@ export default {
 
     // 返回需要暴露给模板的数据和方法
     return {
+      isFullPerson,
       RawGrades,
       nums,
       names,
@@ -272,6 +302,7 @@ export default {
       fetchArrNum,
       handleInput,
       handleInputToExpert,
+      CheckToCalculateGroupAverages,
       exportResult,
       test,
     };
@@ -279,3 +310,4 @@ export default {
 }
 
 </script>
+../../../components/data.js
