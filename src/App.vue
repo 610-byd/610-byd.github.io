@@ -7,7 +7,7 @@
     
     <!-- nav -->
     <nav class="nav">
-      <h1 class="logo">webyd</h1>
+      <RouterLink to="/"><h1 class="logo">webyd</h1></RouterLink>
       <div class="divider"></div>
       <RouterLink to="/"><span>home</span></RouterLink>
       <RouterLink to="/about"><span>about</span></RouterLink>
