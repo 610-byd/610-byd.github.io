@@ -1,0 +1,1 @@
+import{_ as e,o as a,c as o}from"./index-DBkfogb6.js";const t={name:"aboutPage"};function c(s,n,r,_,p,d){return a(),o("h1",null,"This is a aboutPage")}const u=e(t,[["render",c],["__scopeId","data-v-59cbc7a0"]]);export{u as default};
