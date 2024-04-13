@@ -31,21 +31,6 @@
 </template>
 
 <script>
-import {gsap} from 'gsap';
-
-
-export default {
-  name: 'App',
-  setup(){
-    onMounted(() => {
-      gsap.from('.header', {
-        y: -100,
-        ease: "power1.out",
-        duration: 2,
-      })
-    }) 
-  }
-}
 </script>
 
 
