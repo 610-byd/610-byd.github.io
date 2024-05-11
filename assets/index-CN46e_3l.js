@@ -1,0 +1,1 @@
+import{_ as o,o as n,c as a,F as s,a as t}from"./index-rlbZsHKG.js";const e={},l=t("p",null,"E-main:gytfu39@outlook.com",-1),u=t("p",null,"wechat: dyb_vscode ",-1);const c=o(e,[["render",function(o,t){return n(),a(s,null,[l,u],64)}]]);export{c as default};
