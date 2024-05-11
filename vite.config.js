@@ -16,7 +16,7 @@ export default defineConfig({
       }
     },
   },
-  base: "./",
+  base: "/",
   plugins: [
     Components({
       resolvers: [ElementPlusResolver()],
