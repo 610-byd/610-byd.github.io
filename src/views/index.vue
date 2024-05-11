@@ -1,10 +1,16 @@
 <template>
     <main>
-        <div id="lottie"></div>
+        <div class="welcome">
+            <span>H</span>
+            <span>E</span>
+            <span>L</span>
+            <span>L</span>
+            <span>O</span>
+        </div>
     </main>
 </template>
-<script src="./index.js">
+<script>
 
 </script>
 
-<style scoped src="./index.css"></style>
+<style scoped src="./index.scss"></style>

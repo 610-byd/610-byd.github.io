@@ -1,16 +1,30 @@
 import { fileURLToPath, URL } from 'node:url'
-
+import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import ViteAutoImport from 'unplugin-auto-import/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/",
+  build:{
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
+    },
+  },
+  base: "./",
   plugins: [
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
     vue(),
     ViteAutoImport({
-      imports: ['vue','vue-router']
+      imports: ['vue','vue-router'],
+      resolvers: [ElementPlusResolver()],
     })
   ],
   resolve: {

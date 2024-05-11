@@ -2,6 +2,7 @@
     <nav>
         <RouterLink to="/items/grades"><span>Grade</span></RouterLink>
         <RouterLink to="/items/classGrades"><span>ClassGrade</span></RouterLink>
+        <RouterLink to="/items/choose"><span>ClassChoose</span></RouterLink>
     </nav>
     <router-view />
 </template>

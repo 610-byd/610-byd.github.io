@@ -6,55 +6,17 @@
   <h1 class="tlt">登分器</h1>
 
   <main>
-    <button @click="handleInput" class="MobileBtn">Next</button>
-    <div class="btn">
-      <button class="animated-button" @click="handleInput">
-        <svg xmlns="http://www.w3.org/2000/svg" class="arr-2" viewBox="0 0 24 24">
-          <path
-            d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
-          </path>
-        </svg>
-        <span class="text">Next</span>
-        <span class="circle"></span>
-        <svg xmlns="http://www.w3.org/2000/svg" class="arr-1" viewBox="0 0 24 24">
-          <path
-            d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
-          </path>
-        </svg>
-      </button>
-    </div>
-
-
-    <label>
-      <input type="checkbox" v-model="isFullPerson" @click="CheckToCalculateGroupAverages" />
-      是否去除未考式人员
-    </label>
-
-
-    <div class="input-container">
-      <input type="number" id="input" required="" v-model="ArrNum" @input="fetchArrNum">
-      <label for="input" class="label">输入学号</label>
-      <div class="underline"></div>
-    </div>
-    <input type="number" required="" v-model="ArrNum" @input="fetchArrNum" class="MobileInput">
+    <el-button @click="handleInput">Next</el-button>
+    <el-checkbox v-model="isFullPerson" @click="CheckToCalculateGroupAverages" label="是否去除未考式人员" />
+    <el-input required="" min="0" max="63" v-model="ArrNum" style="width: 240px;" @input="fetchArrNum" @keyup.up="upValue" @keyup.down="downValue" placeholder="输入学号" />
 
 
     <h2>当前学生：{{ ArrName }}</h2>
 
-
-    <div class="input-container">
-      <input type="number" id="input" required="" v-model="grades" @keyup.enter="handleInput">
-      <label for="input" class="label">输入其分数</label>
-      <div class="underline"></div>
-    </div>
-    <input type="number" required="" v-model="grades" @keyup.enter="handleInput" class="MobileInput">
+    <el-input min="0" required="" v-model="grades" style="width: 240px;" @keyup.enter="handleInput" placeholder="输入成绩" />
 
 
-    <button @click="handleInputToExpert">导出</button>
-
-
-    <button @click="test">测试</button>
-
+    <el-button @click="handleInputToExpert">导出</el-button>
 
     <div class="input-box">
       <div class="container">
@@ -102,18 +64,6 @@ export default {
     const RawGrades = ref(DataArr.map(item => item.grade));
     const avgEverySeven = ref([]);
     const isFullPerson = ref(false);
-
-
-    onMounted(() => {
-    })
-
-    /**
-     * 测试
-     */
-    function test() {
-      console.log(RawGrades.value);
-      console.log(isFullPerson.value);
-    }
 
 
     /**
@@ -165,6 +115,7 @@ export default {
      * 计算每组（默认七个）原始成绩的平均分，若最后不足七个则按剩余数量计算平均数。
      * 该函数是一个计算属性，不接受参数。
      *
+     * @param {Array} scores 原始成绩数组。
      * @returns {Array} 返回一个包含每组成绩平均分的数组。
      */
     function calculateGroupAverages(scores) {
@@ -183,15 +134,20 @@ export default {
           totalScore += rightScores;
           numGroups++;
           groupAverages.push(groupAverage);
+
         }
       } else {
         for (let i = 0; i < scores.length; i += groupSizes) {
           const groupEnd = Math.min(i + groupSizes, scores.length);
           const groupScores = scores.slice(i, groupEnd);
-          const groupAverage = groupScores.reduce((sum, score) => sum + score, 0) / groupScores.length;
+          const groupAverage = groupScores.reduce((sum, score) => sum + parseInt(score,10),0) / groupScores.length;
           totalScore += groupScores;
           numGroups++;
           groupAverages.push(groupAverage);
+          console.log(groupScores.reduce((sum, score) => sum + score, 0));
+          console.log(groupEnd);
+          console.log(groupScores);
+          console.log(groupAverage);
         }
       }
 
@@ -261,35 +217,17 @@ export default {
       writeFileXLSX(wb, "result.xlsx");
     }
 
-
-
-    // let str = `num,name,grade\n`
-    // const download = (str, data) => {
-    //   // 增加\t为了不让表格显示科学计数法或者其他格式
-    //   for (let i = 0; i < data.length; i++) {
-    //     for (const key in data[i]) {
-    //       str += `${data[i][key] + '\t'},`;
-    //     }
-    //     str += '\n';
-    //   }
-    //   // encodeURIComponent解决中文乱码
-    //   const uri = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(str);
-    //   // 通过创建a标签实现
-    //   const link = document.createElement("a");
-    //   link.href = uri;
-    //   // 对下载的文件命名
-    //   link.download = "下载数据.csv";
-    //   link.click();
-    // }
-
-
-
-
-
-
+    function upValue(){
+      ArrNum.value++
+    }
+    function downValue(){
+      ArrNum.value--
+    }
 
     // 返回需要暴露给模板的数据和方法
     return {
+      downValue,
+      upValue,
       isFullPerson,
       RawGrades,
       nums,
@@ -304,10 +242,9 @@ export default {
       handleInputToExpert,
       CheckToCalculateGroupAverages,
       exportResult,
-      test,
     };
   }
 }
 
+
 </script>
-../../../components/data.js
