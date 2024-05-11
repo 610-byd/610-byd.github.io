@@ -1,0 +1,1 @@
+import{_ as a,o as e,c as o}from"./index-D93SlkgL.js";const s=a({name:"aboutPage"},[["render",function(a,s,t,n,r,c){return e(),o("h1",null,"This is a aboutPage")}],["__scopeId","data-v-59cbc7a0"]]);export{s as default};
