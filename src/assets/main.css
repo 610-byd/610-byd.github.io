@@ -36,3 +36,8 @@ a span {
 a span:hover {
   background-size: 100% 2px;
 }
+
+header{
+  position: sticky;
+  top: 0;
+}

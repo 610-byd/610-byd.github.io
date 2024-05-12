@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@xmldom/xmldom':
+    specifier: ^0.8.10
+    version: 0.8.10
   element-plus:
     specifier: ^2.7.2
     version: 2.7.2(vue@3.4.21)
@@ -608,6 +611,11 @@ packages:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
+    dev: false
+
+  /@xmldom/xmldom@0.8.10:
+    resolution: {integrity: sha512-2WALfTl4xo2SkGCYRt6rDTFfk9R1czmBvUQy12gK2KuRKIpWEhcbbzy8EZXtz/jkRqHX8bFEc6FC1HjX4TUWYw==}
+    engines: {node: '>=10.0.0'}
     dev: false
 
   /acorn@8.11.3:

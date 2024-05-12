@@ -75,7 +75,7 @@
                             去注册
                         </button>
                     </div>
-                    <img src="./img/log.svg" class="image" alt="" />
+                    <img src="../../assets/img/log.svg" class="image" alt="" />
                 </div>
                 <div class="panel right-panel">
                     <div class="content">
@@ -87,7 +87,7 @@
                             去登录
                         </button>
                     </div>
-                    <img src="./img/register.svg" class="image" alt="" />
+                    <img src="../../assets/img/register.svg" class="image" alt="" />
                 </div>
             </div>
         </div>

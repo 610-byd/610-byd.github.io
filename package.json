@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@xmldom/xmldom": "^0.8.10",
     "element-plus": "^2.7.2",
     "gsap": "^3.12.5",
     "sass": "^1.76.0",
