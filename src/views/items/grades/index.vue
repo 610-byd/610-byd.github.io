@@ -10,7 +10,6 @@
     <el-checkbox v-model="isFullPerson" @click="CheckToCalculateGroupAverages" label="是否去除未考式人员" />
     <el-input required="" min="0" max="63" v-model="ArrNum" style="width: 240px;" @input="fetchArrNum" @keyup.up="upValue" @keyup.down="downValue" placeholder="输入学号" />
 
-
     <h2>当前学生：{{ ArrName }}</h2>
 
     <el-input min="0" required="" v-model="grades" style="width: 240px;" @keyup.enter="handleInput" placeholder="输入成绩" />
@@ -173,19 +172,6 @@ export default {
       // const newArray = markUnpassedPoint(DataArr);
       addTeamGrade(DataArr);
     }
-    /**
-     * 标记未及格成绩
-     * @param {} objects 
-     */
-    // function markUnpassedPoint(objects) {
-    //   return objects.map(obj => {
-    //     if (obj.grade < 60) {
-    //       return { ...obj, isUnpass: true };
-    //     }
-    //     return obj;
-    //   });
-    // }
-
     /**
      * 将小组平均分合并入成绩数组
      * @param {} objects 

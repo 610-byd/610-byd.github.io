@@ -8,6 +8,16 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 // https://vitejs.dev/config/
 export default defineConfig({
   build:{
+    rollupOptions:{
+      output:{
+        manualChunks: {
+          'vue': ['vue','vue-router'],
+          'element-plus': ['element-plus'],
+          'xlsx': ['xlsx'],
+          'gsap': ['gsap'],
+        }
+      }
+    },
     minify: 'terser',
     terserOptions: {
       compress: {
