@@ -1,14 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+      window.addEventListener(
+        "error",
+        (e) => {
+          if (e.target.tagName !== "script" || e instanceof ErrorEvent) {
+            return;
+          }
+          //尝试尝试重新加载js
+          const script = e.target;
+          const src = script.src;
+
+          // 检查是否已经加载过该文件
+          if (document.querySelector(`script[src="${src}"]`)) {
+            return;
+          }
+
+          // 移除原来的 script 元素
+          script.remove();
+
+          // 创建一个新的 script 元素
+          const newScript = document.createElement("script");
+          newScript.src = src;
+
+          // 设置新的 script 元素的 onerror 属性
+          if (script.onerror) {
+            newScript.onerror = script.onerror;
+          }
+
+          // 将新创建的 script 元素添加到 document.head 中
+          document.head.appendChild(newScript);
+        },
+        true
+      );
+    </script>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
-    <script type="module" crossorigin src="/assets/index-BNWKu5SP.js"></script>
+    <script type="module" crossorigin src="/assets/index-poCiYIN8.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/vue-D7_ZUHRa.js">
     <link rel="modulepreload" crossorigin href="/assets/element-plus-6zdA6W_i.js">
-    <link rel="stylesheet" crossorigin href="/assets/index-DYK7Y2Xm.css">
+    <link rel="stylesheet" crossorigin href="/assets/index-CAHAxVyG.css">
   </head>
   <body>
     <div id="app"></div>
