@@ -1,0 +1,1 @@
+import{_ as o}from"./index-BvmzhVvH.js";import{p as t,q as s,F as e,t as n}from"./vue-CAdAVGuS.js";import"./element-plus-CGdPHNE3.js";const l={},r=n("p",null,"E-main:gytfu39@outlook.com",-1),u=n("p",null,"wechat: dyb_vscode ",-1);const a=o(l,[["render",function(o,n){return t(),s(e,null,[r,u],64)}]]);export{a as default};
