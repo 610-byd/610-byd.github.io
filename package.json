@@ -5,17 +5,20 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node ./script/dns-pre.cjs",
     "preview": "vite preview"
   },
   "dependencies": {
     "@xmldom/xmldom": "^0.8.10",
     "element-plus": "^2.7.2",
+    "glob": "^10.4.1",
     "gsap": "^3.12.5",
+    "node-html-parser": "^6.1.13",
     "sass": "^1.76.0",
     "terser": "^5.31.0",
     "unplugin-auto-import": "^0.17.5",
     "unplugin-vue-components": "^0.26.0",
+    "url-regex": "^5.0.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",
     "xlsx": "^0.18.5"

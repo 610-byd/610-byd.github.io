@@ -34,7 +34,7 @@ async function needLoad() {
     lastSrcs = NewScripts;
     return result;
 }
-const duration = 600000000;
+const duration = 5000;
 function autoRefresh() {
     setTimeout(async () => {
         const willUpdate = await needLoad();

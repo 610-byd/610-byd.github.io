@@ -1,3 +1,4 @@
+
 <template>
 
   <header class="header" style="background: black;">
@@ -27,7 +28,6 @@
   </header>
 
   <router-view />
-
 </template>
 
 <script>
